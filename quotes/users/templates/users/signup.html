@@ -1,0 +1,57 @@
+{% extends "quotesapp/base.html" %} {% block content %}
+
+<form method="post" action="{% url 'users:signup' %}">
+  {% csrf_token %}
+  <div>
+    <h2>Sign Up</h2>
+  </div>
+  <article class="my-3" id="input-group">
+    <div
+      class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2"
+    ></div>
+    <div>
+      <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example">
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text"
+              style="width: 200px"
+              id="basic-addon1"
+              >Username:</span
+            >
+            <span class="form-control"> {{ form.username }} </span>
+            <span>{{ form.errors.username }}</span>
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text"
+              style="width: 200px"
+              id="basic-addon1"
+              >Password:</span
+            >
+            <span class="form-control"> {{ form.password1 }} </span>
+            <span>{{ form.errors.password1 }}</span>
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text"
+              style="width: 200px"
+              id="basic-addon1"
+              >Password confirmation:</span
+            >
+            <span class="form-control"> {{ form.password2 }} </span>
+            <span>{{ form.errors.password2 }}</span>
+          </div>
+
+          <div class="col-md-4 mx-auto p-3" style="width: 300px">
+            <button type="submit" class="btn btn-primary mx-2">
+              Registration
+            </button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</form>
+{% endblock %}

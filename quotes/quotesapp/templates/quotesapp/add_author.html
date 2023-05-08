@@ -1,0 +1,60 @@
+{% extends "quotesapp/base.html" %} {% block content %}
+
+<form method="POST" action="{% url 'quotesapp:add_author' %}">
+  {% csrf_token %}
+  <article class="my-3" id="input-group">
+    <div
+      class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2"
+    >
+      <h2>Add author</h2>
+    </div>
+    <div>
+      <div class="bd-example-snippet bd-code-snippet">
+        <div class="bd-example">
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text"
+              style="width: 130px"
+              id="basic-addon1"
+              >Fullname:</span
+            >
+            <span class="form-control"> {{ form.fullname }} </span>
+            <span>{{ form.errors.fullname }}</span>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" style="width: 130px"
+              >Born date:</span
+            >
+            <span class="form-control"> {{ form.born_date }} </span>
+            <span>{{ form.errors.born_date }}</span>
+          </div>
+          <div class="input-group mb-3">
+            <span
+              class="input-group-text"
+              id="basic-addon1"
+              style="width: 130px"
+              >Born location:</span
+            >
+            <span class="form-control"> {{ form.born_location }} </span>
+            <span>{{ form.errors.born_location }}</span>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text" style="width: 130px"
+              >Description:</span
+            >
+            <span class="form-control"> {{ form.description }} </span>
+            <span>{{ form.errors.description }}</span>
+          </div>
+
+          <div class="col-md-4 mx-auto p-3" style="width: 300px">
+            <button type="submit" class="btn btn-primary mx-2">
+              Add author
+            </button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</form>
+{% endblock %}
