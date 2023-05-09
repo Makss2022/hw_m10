@@ -2,7 +2,7 @@ from datetime import datetime
 from django.shortcuts import redirect, render
 from django.core.paginator import Paginator
 
-from .forms import AuthorForm, QuoteForm
+from .forms import AuthorForm, QuoteForm, Tag
 from .models import Author, Quote
 
 # Create your views here.
@@ -16,7 +16,7 @@ def main(request, page=1):
 
 
 def author(request, author_fullname: str):
-    author = Author.objects.filter(fullname=author_fullname)[0]
+    author = Author.objects.get(fullname=author_fullname)
     return render(request, 'quotesapp/author.html', {'author': author})
 
 
@@ -49,3 +49,11 @@ def add_quote(request):
             return render(request, 'quotesapp/add_quote.html', {'form': form})
     
     return render(request, 'quotesapp/add_quote.html', context={'form': QuoteForm()})
+
+def quotes_by_tag(request, tag, page=1):
+    tag_obj = Tag.objects.get(name=tag)
+    quotes = Quote.objects.filter(tags=tag_obj)
+    pur_page = 10
+    paginator = Paginator(quotes, pur_page)
+    quotes_on_page = paginator.page(page)
+    return render(request, 'quotesapp/quotes_by_tag.html', context={'quotes': quotes_on_page, 'tag_search': tag})
