@@ -14,9 +14,15 @@ services:
         build: .
         ports:
            - 8000:8000
-        command: python manage.py runserver 0.0.0.0:8000
-        volumes:
-            - .:/app
+        environment:
+            - DJANGO_SUPERUSER_USERNAME=admin
+            - DJANGO_SUPERUSER_EMAIL=admin@admin.com
+            - DJANGO_SUPERUSER_PASSWORD=admin
+        command: bash -c 
+            "python manage.py migrate 
+            && python manage.py createsuperuser --noinput 
+            && python -m utils.migration 
+            && python manage.py runserver 0.0.0.0:8000"
         depends_on:
             - db
 
